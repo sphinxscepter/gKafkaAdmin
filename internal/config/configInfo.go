@@ -1,10 +1,10 @@
 package config
 
 type AppConfig struct {
-	App Configuartion `mapstructure:"app" yaml: "appNmae"`
+	App App `mapstructure:"app" yaml: "app"`
 }
 
-type Configuartion struct {
+type App struct {
 	AppName string     `mapstructure:"appName" yaml: "appNmae"`
 	Server  ServerInfo `mapstructure:"server" yaml: "server"`
 }
