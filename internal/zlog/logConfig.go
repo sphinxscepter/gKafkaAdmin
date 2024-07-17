@@ -60,7 +60,10 @@ func init() {
 	// 设置日志中的日志记录时间的格式
 	encoderConfig.EncodeTime = zapcore.TimeEncoderOfLayout("2006-01-02 15:04:05.000")
 	// encoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
-	encoder := zapcore.NewJSONEncoder(encoderConfig)
+	encoder := zapcore.NewConsoleEncoder(encoderConfig)
+	if logConfig.Log.Format == "json" {
+		encoder = zapcore.NewJSONEncoder(encoderConfig)
+	}
 
 	logFile, _ := os.OpenFile(
 		filepath.Join(logConfig.Log.RootDir, logConfig.Log.Filename),
@@ -72,6 +75,7 @@ func init() {
 	core := zapcore.NewTee(
 		zapcore.NewCore(encoder, zapcore.AddSync(os.Stdout), zap.DebugLevel),
 		zapcore.NewCore(encoder, fileWriteSyncer, zap.DebugLevel),
+		zapcore.NewCore(encoder, getLogFileWriter(), zap.InfoLevel),
 	)
 
 	logger = zap.New(core)
@@ -100,7 +104,7 @@ func getCallerInfoForLog() (callerFields []zap.Field) {
 	funcName := runtime.FuncForPC(pc).Name()
 	funcName = path.Base(funcName) //Base函数返回路径的最后一个元素，只保留函数名
 
-	callerFields = append(callerFields, zap.String("func", funcName), zap.String("file", file), zap.Int("line", line))
+	callerFields = append(callerFields, zap.String("file", file), zap.String("func", funcName), zap.Int("line", line))
 	return
 }
 

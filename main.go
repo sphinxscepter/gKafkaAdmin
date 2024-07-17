@@ -16,7 +16,10 @@ func main() {
 	appConfigInfo := config.InitConfiguration()
 
 	r.GET("/test", func(ctx *gin.Context) {
-		zlog.Info("test.OK")
+		zlog.Info(ctx.ClientIP())
+		zlog.Info(ctx.FullPath())
+		zlog.Info(ctx.ContentType())
+		zlog.Info(ctx.RemoteIP())
 		ctx.String(http.StatusOK, "TEST OK")
 	})
 
