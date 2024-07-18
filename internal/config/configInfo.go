@@ -10,8 +10,9 @@ type App struct {
 }
 
 type ServerInfo struct {
-	Ip   string `mapstructure:"ip" yaml: "ip"`
-	Port int    `mapstructure:"port" yaml: "port"`
+	Ip         string `mapstructure:"ip" yaml: "ip"`
+	Port       int    `mapstructure:"port" yaml: "port"`
+	StaticPath string `mapstructure:"staticPath" yaml: "staticPath"`
 }
 
 var AppConf = new(AppConfig)

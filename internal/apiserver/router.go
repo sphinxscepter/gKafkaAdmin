@@ -2,6 +2,7 @@ package apiserver
 
 import (
 	testservice "gKafkaAdmin/internal/apiserver/service"
+	"gKafkaAdmin/internal/config"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -17,4 +18,8 @@ func SetRouter(engine *gin.Engine) {
 			ctx.JSON(http.StatusOK, testservice.TestFunc2(ctx))
 		})
 	}
+}
+
+func SetStaticInfo(engine *gin.Engine, appConfigInfo config.AppConfig) {
+	engine.Static("/static", appConfigInfo.App.Server.StaticPath)
 }

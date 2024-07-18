@@ -17,15 +17,12 @@ func TestFunc(ctx *gin.Context) string {
 }
 
 func TestFunc2(ctx *gin.Context) vo.ResultStructure {
-	zlog.Info(ctx.ClientIP())
-	zlog.Info(ctx.FullPath())
-	zlog.Info(ctx.ContentType())
-	zlog.Info(ctx.RemoteIP())
 	var result vo.ResultStructure
 	result.Code = global.HTTP_RESPONSE_SUCESS
 	result.Message = "OK2"
 	var testData vo.TestData
 	testData.Desc = "123"
 	result.Data = testData
+	zlog.Info(testData.Desc)
 	return result
 }
