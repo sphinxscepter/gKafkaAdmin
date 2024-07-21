@@ -1,7 +1,7 @@
 package zlog
 
 type Log struct {
-	Log LogConfigProperties `mapstructure:"log" yaml: "log"`
+	Log LogConfigProperties `mapstructure:"log" yaml:"log"`
 }
 
 type LogConfigProperties struct {
