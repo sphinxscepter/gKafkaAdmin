@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"gKafkaAdmin/internal/apiserver"
 	"gKafkaAdmin/internal/config"
+	"gKafkaAdmin/internal/router"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,9 +17,9 @@ func main() {
 	appConfigInfo := config.InitConfiguration()
 
 	// 配置请求路由
-	apiserver.SetRouter(r)
+	router.SetRouter(r)
 	// 配置静态资源目录
-	apiserver.SetStaticInfo(r, *appConfigInfo)
+	router.SetStaticInfo(r, *appConfigInfo)
 
 	// 启动gin
 	r.Run(fmt.Sprintf(":%d", appConfigInfo.App.Server.Port))

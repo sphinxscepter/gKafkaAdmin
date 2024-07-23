@@ -1,4 +1,4 @@
-package service
+package testController
 
 import (
 	responseRlt "gKafkaAdmin/internal/module"
